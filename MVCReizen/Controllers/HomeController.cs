@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MVCReizen.Models;
 using System.Diagnostics;
 
@@ -48,15 +49,21 @@ namespace MVCReizen.Controllers
             ViewBag.LandNaam = landNaam;
             return View(bestemmingen);
         }
-        public IActionResult ToonReizen(int id, string bestemmingscode)
+        public IActionResult ToonReizen(string id)
         {
-            var reizen = _context.Reizen.Where(reis => reis.Id == id)
+            var reizen = _context.Reizen.Where(reis => reis.Bestemmingscode == id)
                                                  .OrderBy(reizen => reizen.Vertrek).ToList();
-            //var bestemmingsCode = _context.Reizen.Where(reis => reis.Bestemmingscode == bestemmingscode).FirstOrDefault();
-            var bestemmingsNaam = _context.Bestemmingen.Where(bestemming => bestemming.Code == bestemmingscode).Select(bestemming => bestemming.Plaats).FirstOrDefault();
-            ViewBag.BestemmingsNaam = bestemmingsNaam;
+            var bestemming = _context.Bestemmingen.Find(id);
+            ViewBag.BestemmingsNaam = bestemming.Plaats;
             return View(reizen);
         }
+        public IActionResult ZoekKlant(int id)
+        {
+            var gekozenReis = _context.Reizen.Find(id);
+            //var bestemming = _context.Bestemmingen.Find(id);
+            return View(gekozenReis);
+        }
+        
 
     }
 }
