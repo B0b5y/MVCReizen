@@ -48,6 +48,14 @@ namespace MVCReizen.Controllers
             ViewBag.LandNaam = landNaam;
             return View(bestemmingen);
         }
-        
+        public IActionResult ToonReizen(int id)
+        {
+            var reizen = _context.Reizen.Where(reis => reis.Id == id)
+                                                 .OrderBy(reizen => reizen.Vertrek).ToList();
+            var landNaam = _context.Landen.Where(land => land.Id == id).Select(land => land.Naam).FirstOrDefault();
+            ViewBag.LandNaam = landNaam;
+            return View(reizen);
+        }
+
     }
 }

@@ -1,0 +1,14 @@
+﻿@model List<Reis>
+@using MVCReizen.Models;
+@using MVCReizen.Controllers;
+
+@{
+    ViewData["Reizen"] = "Reizen";
+}
+
+
+<h1> @ViewBag.BestemmingNaam</h1>
+@foreach (var reis in Model)
+{
+    <p><a asp-action="ToonReizen" asp-route-id="@reis.Id">@reis.Vertrek</a></p>
+}

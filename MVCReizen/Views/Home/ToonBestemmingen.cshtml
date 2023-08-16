@@ -8,7 +8,10 @@
 
 
 <h1> @ViewBag.LandNaam</h1>
-<img src="~/images/Argentinië.png" alt="image">
+@{
+    var imagePath = $"~/images/{ViewBag.LandNaam}.png";
+}
+<img src="@Url.Content(imagePath)" alt="image">
 
 @foreach (var bestemming in Model)
 {
