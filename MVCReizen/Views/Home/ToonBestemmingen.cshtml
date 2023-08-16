@@ -6,8 +6,8 @@
     ViewData["Bestemming"] = "Bestemming";
 }
 <h1>Land</h1>
-
-<img src="~/images/.jpg" alt="image">
+@{ var imagePath = $"~/images/.png" };
+<img src="@imagePath" alt="image">
 @foreach (var bestemming in Model)
 {
    
