@@ -1,0 +1,12 @@
+﻿@model List<Bestemming>
+@using MVCReizen.Models;
+@using MVCReizen.Controllers;
+
+@{
+    ViewData["Bestemming"] = "Bestemming";
+}
+<h1>wereldeel</h1>
+@foreach (var bestemming in Model)
+{
+    <p><a asp-action="ToonReizen">@bestemming.Plaats</a></p>
+}

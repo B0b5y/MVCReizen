@@ -1,8 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using MVCReizen.Models;
+using Microsoft.AspNetCore.Mvc.Razor;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<ReizenContext>(options =>
+ options.UseSqlServer(
+ builder.Configuration.GetConnectionString("Reizen")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
