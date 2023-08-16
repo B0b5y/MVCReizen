@@ -32,14 +32,14 @@ namespace MVCReizen.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult ToonLanden()
+        public IActionResult ToonLanden(int id)
         {
-            var landen = _context.Landen.OrderBy(landen => landen.Naam).ToList();
+            var landen = _context.Landen.Where(land=>land.Werelddeelid == id).OrderBy(land=>land.Naam).ToList();
             return View(landen);
         }
-        public IActionResult ToonBestemmingen()
+        public IActionResult ToonBestemmingen(int id)
         {
-            var bestemmingen = _context.Bestemmingen.OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
+            var bestemmingen = _context.Bestemmingen.Where(bestemming=>bestemming.Landid == id).OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
             return View(bestemmingen);
         }
         

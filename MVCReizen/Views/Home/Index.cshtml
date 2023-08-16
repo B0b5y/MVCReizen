@@ -8,6 +8,6 @@
 <h1>Werelddelen</h1>
 @foreach (var werelddeel in Model)
 {
-    <p><a asp-action="ToonLanden">@werelddeel.Naam</a></p>
+    <p><a asp-action="ToonLanden" asp-route-id="@werelddeel.Id">@werelddeel.Naam</a></p>
 }
 

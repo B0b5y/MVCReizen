@@ -5,9 +5,11 @@
 @{
     ViewData["Bestemming"] = "Bestemming";
 }
-<h1>wereldeel</h1>
-<img src="~/images/.jpg" alt="Obraz">
+<h1>Land</h1>
+
+<img src="~/images/.jpg" alt="image">
 @foreach (var bestemming in Model)
 {
-    <p><a asp-action="ToonReizen">@bestemming.Plaats</a></p>
+   
+    <p><a asp-action="ToonReizen" asp-route-id="@bestemming.Landid">@bestemming.Plaats</a></p>
 }

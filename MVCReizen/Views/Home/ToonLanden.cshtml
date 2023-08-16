@@ -5,8 +5,8 @@
 @{
     ViewData["Landen"] = "Landen";
 }
-<h1>wereldeel</h1>
+<h1>Werelddeel</h1>
 @foreach (var land in Model)
 {
-    <p><a asp-action="ToonBestemmingen">@land.Naam</a></p>
+    <p><a asp-action="ToonBestemmingen" asp-route-id="@land.Id">@land.Naam</a></p>
 }
