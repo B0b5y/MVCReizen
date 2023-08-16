@@ -7,8 +7,31 @@
 }
 
 
-<h1> @ViewBag.BestemmingNaam</h1>
-@foreach (var reis in Model)
-{
-    <p><a asp-action="ToonReizen" asp-route-id="@reis.Id">@reis.Vertrek</a></p>
+<h1> @ViewBag.BestemmingsNaam</h1>
+@{
+    var imagePath = $"~/images/{ViewBag.BestemmingsNaam}.png";
 }
+<img src="@Url.Content(imagePath)" alt="image">
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Vertrek</th>
+            <th>Prijs per person</th>
+            <th>Aantal dagen</th>
+            <th>Boeken</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reis in Model)
+        {
+            <tr>
+                <td>@reis.Vertrek</td>
+                <td>@reis.PrijsPerPersoon</td>
+                <td>@reis.AantalDagen</td>
+                <td><a asp-action="Boek" asp-route-id="@reis.Id">Boeken</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -48,12 +48,13 @@ namespace MVCReizen.Controllers
             ViewBag.LandNaam = landNaam;
             return View(bestemmingen);
         }
-        public IActionResult ToonReizen(int id)
+        public IActionResult ToonReizen(int id, string bestemmingscode)
         {
             var reizen = _context.Reizen.Where(reis => reis.Id == id)
                                                  .OrderBy(reizen => reizen.Vertrek).ToList();
-            var landNaam = _context.Landen.Where(land => land.Id == id).Select(land => land.Naam).FirstOrDefault();
-            ViewBag.LandNaam = landNaam;
+            //var bestemmingsCode = _context.Reizen.Where(reis => reis.Bestemmingscode == bestemmingscode).FirstOrDefault();
+            var bestemmingsNaam = _context.Bestemmingen.Where(bestemming => bestemming.Code == bestemmingscode).Select(bestemming => bestemming.Plaats).FirstOrDefault();
+            ViewBag.BestemmingsNaam = bestemmingsNaam;
             return View(reizen);
         }
 
