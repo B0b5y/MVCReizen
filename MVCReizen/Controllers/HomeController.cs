@@ -35,11 +35,17 @@ namespace MVCReizen.Controllers
         public IActionResult ToonLanden(int id)
         {
             var landen = _context.Landen.Where(land=>land.Werelddeelid == id).OrderBy(land=>land.Naam).ToList();
+            var werelddeelNaam = _context.Werelddelen.Where(werelddeel => werelddeel.Id == id)
+                                                 .Select(werelddeel => werelddeel.Naam).FirstOrDefault();
+            ViewBag.WerelddeelNaam = werelddeelNaam;
             return View(landen);
         }
         public IActionResult ToonBestemmingen(int id)
         {
-            var bestemmingen = _context.Bestemmingen.Where(bestemming=>bestemming.Landid == id).OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
+            var bestemmingen = _context.Bestemmingen.Where(bestemming=>bestemming.Landid == id)
+                                                    .OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
+            var landNaam = _context.Landen.Where(land=>land.Id == id).Select(land=>land.Naam).FirstOrDefault();
+            ViewBag.LandNaam = landNaam;
             return View(bestemmingen);
         }
         

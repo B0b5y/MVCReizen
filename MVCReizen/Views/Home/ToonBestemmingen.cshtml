@@ -5,9 +5,11 @@
 @{
     ViewData["Bestemming"] = "Bestemming";
 }
-<h1>Land</h1>
-@{ var imagePath = $"~/images/.png" };
-<img src="@imagePath" alt="image">
+
+
+<h1> @ViewBag.LandNaam</h1>
+<img src="~/images/Argentinië.png" alt="image">
+
 @foreach (var bestemming in Model)
 {
    

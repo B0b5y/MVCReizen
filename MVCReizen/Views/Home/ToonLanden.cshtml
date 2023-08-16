@@ -5,7 +5,7 @@
 @{
     ViewData["Landen"] = "Landen";
 }
-<h1>Werelddeel</h1>
+<h1>@ViewBag.WerelddeelNaam</h1>
 @foreach (var land in Model)
 {
     <p><a asp-action="ToonBestemmingen" asp-route-id="@land.Id">@land.Naam</a></p>
