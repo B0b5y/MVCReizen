@@ -42,5 +42,6 @@ namespace MVCReizen.Controllers
             var bestemmingen = _context.Bestemmingen.OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
             return View(bestemmingen);
         }
+        
     }
 }
