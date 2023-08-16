@@ -5,17 +5,22 @@
     ViewData["Titel"] = "ZoekKlant";
 }
 
-<p>Besteming</p>
+<h3>Besteming</h3>
 <p>@Model.Bestemmingscode</p>
 <p> </p>
-<p>Vertrek</p>
+<h3>Vertrek</h3>
 <p>@Model.Vertrek</p>
 <p> </p>
-<p>Aantal dagen</p>
+<h3>Aantal dagen</h3>
 <p>@Model.AantalDagen</p>
 <p> </p>
-<p>Prijs per persoon</p>
+<h3>Prijs per persoon</h3>
 <p>@Model.PrijsPerPersoon</p>
+<div>
+    <label for="ZoekEenKlant">Klant invulen:</label>
+    <input type="text" id="KlantZoeken" name="klientSearch">
+    <button type="button" id="searchButton">Vind</button>
+</div>
 
 
 
