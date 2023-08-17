@@ -68,6 +68,7 @@ namespace MVCReizen.Controllers
             return View(gekozenReis);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Zoek(string klantZoeken, int reisId)
         {
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis=>reis.BestemmingscodeNavigation).FirstOrDefault();
@@ -76,13 +77,14 @@ namespace MVCReizen.Controllers
             var reisEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };
             return View(reisEnKlanten);
         }
-        [HttpGet]
-        public IActionResult Boeking()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Boeking(object reisEnKlanten)
         {
+            var reisEnKlant = new ReisEnKlanten() == reisEnKlanten;
             
             
-            
-            return View();
+            return View(reisEnKlant);
         }
     }
 } 
