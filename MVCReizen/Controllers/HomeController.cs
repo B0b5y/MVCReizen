@@ -59,21 +59,25 @@ namespace MVCReizen.Controllers
             return View(reizen);
         }
         public IActionResult ZoekKlant(int id)
-        {
-            //var gekozenReis = _context.Reizen.Find(id);
+        {          
             var gekozenReis = _context.Reizen.Where(reis => reis.Id == id)
                 .Include(reis => reis.BestemmingscodeNavigation)
                 .FirstOrDefault();
             
             return View(gekozenReis);
         }
-        //[HttpPost]
+        [HttpPost]
         public IActionResult Zoek(string klantZoeken)
         {
             var klanten = _context.Klanten.Where(klant => klant.Familienaam.Contains(klantZoeken))
-                    .Include(klant => klant.Woonplaats).OrderBy(klant=>klant.Familienaam).ToList();
-            
+                    .Include(klant => klant.Woonplaats).OrderBy(klant=>klant.Familienaam).ToList(); 
             return View(klanten);
+        }
+        [HttpPost]
+        public IActionResult Boeking(int id)
+        {
+            var boeking = _context.Boekingen.Where(klant => klant.Id == id).FirstOrDefault();
+        return View(boeking);
         }
     }
 } 

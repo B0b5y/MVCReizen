@@ -5,7 +5,17 @@
 @{
     ViewData["Title"] = "Zoek";
 }
-
+@*<h3>Besteming</h3>
+<p>@Model.BestemmingscodeNavigation.Plaats</p>
+<p> </p>
+<h3>Vertrek</h3>
+<p>@Model.Vertrek</p>
+<p> </p>
+<h3>Aantal dagen</h3>
+<p>@Model.AantalDagen</p>
+<p> </p>
+<h3>Prijs per persoon</h3>
+<p>@Model.PrijsPerPersoon</p>*@
 
 
     <table class="table">
@@ -27,8 +37,8 @@
                     <td>@klant.Voornaam</td>
                     <td>@klant.Adres</td>
                     <td>@klant.Woonplaats.Postcode</td>
-                    <td>@klant.Woonplaats</td>
-                    <td><a asp-action="boeken" asp-route-id="klant.Id">Boeken</a></td>
+                    <td>@klant.Woonplaats.Naam</td>
+                    <td><a asp-action="boeking" asp-route-id="klant.id">Boeken</a></td>
                 </tr>
             }
         </tbody>

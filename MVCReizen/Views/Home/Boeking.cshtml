@@ -1,0 +1,34 @@
+﻿@model Boeking;
+@using MVCReizen.Models;
+@using MVCReizen.Controllers;
+@{
+    ViewData["Title"] = "Boeking";
+}
+
+<h1>Reis</h1>
+<h3>Bestemming</h3>
+<h2>@Model.Reis.BestemmingscodeNavigation.Plaats</h2>
+<h3>Vertrek</h3>
+<h2>@Model.Reis.Vertrek</h2>
+<h3>Aantal Dagen</h3>
+<h2>@Model.Reis.AantalDagen</h2>
+<h3>Prijs per persosn</h3>
+<h2>@Model.Reis.PrijsPerPersoon</h2>
+<h1>Klant</h1>
+<h3>@Model.Klant.Voornaam @Model.Klant.Familienaam</h3>
+<h3>@Model.Klant.Adres</h3>
+<h3>@Model.Klant.Woonplaats.Postcode @Model.Klant.Woonplaats.Naam</h3>
+<h1>Boeking</h1>
+<form method="post" action="~/Home/Boeking">
+    <div>
+        <label for="Boeking">Aantal vowassen</label>
+        <input type="number" id="volwassen" name="volwassen" required>
+        <label for="Boeking">Aantal kinderen</label>
+        <input type="number" id="kinderen" name="kinderen" >
+        <label for="Boeking">AnnulatieVerzekering</label>
+        <input type="checkbox" id="veerzekering" name="verzekering">
+        <button type="submit">Boeken</button>
+    </div>
+</form>
+
+
