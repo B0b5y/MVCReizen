@@ -38,11 +38,18 @@
                     <td>@klant.Adres</td>
                     <td>@klant.Woonplaats.Postcode</td>
                     <td>@klant.Woonplaats.Naam</td>
-                    <td><a asp-action="boeking" asp-route-id="reisEnKlanten" >Boeken</a></td>                  
-                </tr>
+                    <td>
+                    <form method="post" action="~/Home/boeking">
+                        <input type="hidden" name="reisId" value="@Model.Reis.Id" />
+                        <input type="hidden" name="klantId" value="@klant.Id" />
+                        <button type="submit">Boeken</button>
+                    </form>
+                    </td>
+            </tr>
             }
         </tbody>
     </table>
+
 
  
 
