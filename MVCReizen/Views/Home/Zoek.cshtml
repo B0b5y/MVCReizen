@@ -1,0 +1,37 @@
+﻿@model List<Klant>
+@using MVCReizen.Models;
+@using MVCReizen.Controllers;
+
+@{
+    ViewData["Title"] = "Zoek";
+}
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Familienaam</th>
+                <th>Voornaam</th>
+                <th>Adres</th>
+                <th>Postcode</th>
+                <th>Woonplaats</th>
+                <th>Boeken</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var klant in Model)
+            {
+                <tr>
+                    <td>@klant.Familienaam</td>
+                    <td>@klant.Voornaam</td>
+                    <td>@klant.Adres</td>
+                    <td>@klant.Woonplaats.Postcode</td>
+                    <td>@klant.Woonplaats</td>
+                    <td><a asp-action="boeken" asp-route-id="klant.Id">Boeken</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+

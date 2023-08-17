@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
 using System.Diagnostics;
 
@@ -35,7 +36,7 @@ namespace MVCReizen.Controllers
         }
         public IActionResult ToonLanden(int id)
         {
-            var landen = _context.Landen.Where(land=>land.Werelddeelid == id).OrderBy(land=>land.Naam).ToList();
+            var landen = _context.Landen.Where(land => land.Werelddeelid == id).OrderBy(land => land.Naam).ToList();
             var werelddeelNaam = _context.Werelddelen.Where(werelddeel => werelddeel.Id == id)
                                                  .Select(werelddeel => werelddeel.Naam).FirstOrDefault();
             ViewBag.WerelddeelNaam = werelddeelNaam;
@@ -43,9 +44,9 @@ namespace MVCReizen.Controllers
         }
         public IActionResult ToonBestemmingen(int id)
         {
-            var bestemmingen = _context.Bestemmingen.Where(bestemming=>bestemming.Landid == id)
+            var bestemmingen = _context.Bestemmingen.Where(bestemming => bestemming.Landid == id)
                                                     .OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
-            var landNaam = _context.Landen.Where(land=>land.Id == id).Select(land=>land.Naam).FirstOrDefault();
+            var landNaam = _context.Landen.Where(land => land.Id == id).Select(land => land.Naam).FirstOrDefault();
             ViewBag.LandNaam = landNaam;
             return View(bestemmingen);
         }
@@ -59,11 +60,20 @@ namespace MVCReizen.Controllers
         }
         public IActionResult ZoekKlant(int id)
         {
-            var gekozenReis = _context.Reizen.Find(id);
-            //var bestemming = _context.Bestemmingen.Find(id);
+            //var gekozenReis = _context.Reizen.Find(id);
+            var gekozenReis = _context.Reizen.Where(reis => reis.Id == id)
+                .Include(reis => reis.BestemmingscodeNavigation)
+                .FirstOrDefault();
+            
             return View(gekozenReis);
         }
-        
-
+        //[HttpPost]
+        public IActionResult Zoek(string klantZoeken)
+        {
+            var klanten = _context.Klanten.Where(klant => klant.Familienaam.Contains(klantZoeken))
+                    .Include(klant => klant.Woonplaats).OrderBy(klant=>klant.Familienaam).ToList();
+            
+            return View(klanten);
+        }
     }
-}
+} 

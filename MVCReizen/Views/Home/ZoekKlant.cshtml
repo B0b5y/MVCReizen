@@ -6,7 +6,7 @@
 }
 
 <h3>Besteming</h3>
-<p>@Model.Bestemmingscode</p>
+<p>@Model.BestemmingscodeNavigation.Plaats</p>
 <p> </p>
 <h3>Vertrek</h3>
 <p>@Model.Vertrek</p>
@@ -16,11 +16,13 @@
 <p> </p>
 <h3>Prijs per persoon</h3>
 <p>@Model.PrijsPerPersoon</p>
-<div>
-    <label for="ZoekEenKlant">Klant invulen:</label>
-    <input type="text" id="KlantZoeken" name="klientSearch">
-    <button type="button" id="searchButton">Vind</button>
-</div>
+<form method="post" action="~/Home/Zoek">
+    <div>
+        <label for="KlantZoeken">Familienaam bevat:</label>
+        <input type="text" id="KlantZoeken">
+        <button type="submit">Zoeken</button>
+    </div>
+</form>
 
 
 
