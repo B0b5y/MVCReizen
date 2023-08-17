@@ -1,21 +1,21 @@
-﻿@model List<Klant>
+﻿@model ReisEnKlanten;
 @using MVCReizen.Models;
 @using MVCReizen.Controllers;
 
 @{
     ViewData["Title"] = "Zoek";
 }
-@*<h3>Besteming</h3>
-<p>@Model.BestemmingscodeNavigation.Plaats</p>
+<h3>Besteming</h3>
+<p>@Model.Reis.BestemmingscodeNavigation.Plaats<p>
 <p> </p>
 <h3>Vertrek</h3>
-<p>@Model.Vertrek</p>
+<p>@Model.Reis.Vertrek</p>
 <p> </p>
 <h3>Aantal dagen</h3>
-<p>@Model.AantalDagen</p>
+<p>@Model.Reis.AantalDagen</p>
 <p> </p>
 <h3>Prijs per persoon</h3>
-<p>@Model.PrijsPerPersoon</p>*@
+<p>@Model.Reis.PrijsPerPersoon</p>
 
 
     <table class="table">
@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var klant in Model)
+            @foreach (var klant in Model.Klanten)
             {
                 <tr>
                     <td>@klant.Familienaam</td>

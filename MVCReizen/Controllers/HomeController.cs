@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
+using MVCReizen.ModelView;
 using System.Diagnostics;
 
 namespace MVCReizen.Controllers
@@ -67,17 +68,23 @@ namespace MVCReizen.Controllers
             return View(gekozenReis);
         }
         [HttpPost]
-        public IActionResult Zoek(string klantZoeken)
+        public IActionResult Zoek(string klantZoeken, int reisId)
         {
+            var reis = _context.Reizen.Where(reis => reis.Id == reisId).FirstOrDefault();
             var klanten = _context.Klanten.Where(klant => klant.Familienaam.Contains(klantZoeken))
-                    .Include(klant => klant.Woonplaats).OrderBy(klant=>klant.Familienaam).ToList(); 
-            return View(klanten);
+                    .Include(klant => klant.Woonplaats).OrderBy(klant=>klant.Familienaam).ToList();
+            var bestemmingEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };
+            return View(bestemmingEnKlanten);
         }
-        [HttpPost]
+        [HttpGet]
         public IActionResult Boeking(int id)
         {
-            var boeking = _context.Boekingen.Where(klant => klant.Id == id).FirstOrDefault();
-        return View(boeking);
+            
+            //using var context = new ReizenContext();
+            //context.Add(new Boeking { });
+            //context.SaveChanges();
+            
+        return View();
         }
     }
 } 
