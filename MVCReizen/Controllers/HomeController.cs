@@ -70,21 +70,19 @@ namespace MVCReizen.Controllers
         [HttpPost]
         public IActionResult Zoek(string klantZoeken, int reisId)
         {
-            var reis = _context.Reizen.Where(reis => reis.Id == reisId).FirstOrDefault();
+            var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis=>reis.BestemmingscodeNavigation).FirstOrDefault();
             var klanten = _context.Klanten.Where(klant => klant.Familienaam.Contains(klantZoeken))
                     .Include(klant => klant.Woonplaats).OrderBy(klant=>klant.Familienaam).ToList();
-            var bestemmingEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };
-            return View(bestemmingEnKlanten);
+            var reisEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };
+            return View(reisEnKlanten);
         }
         [HttpGet]
-        public IActionResult Boeking(int id)
+        public IActionResult Boeking()
         {
             
-            //using var context = new ReizenContext();
-            //context.Add(new Boeking { });
-            //context.SaveChanges();
             
-        return View();
+            
+            return View();
         }
     }
 } 
