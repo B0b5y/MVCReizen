@@ -25,13 +25,19 @@
 <h1>Boeking</h1>
 <form method="post" action="~/Home/Boeking">
     <div>
-        <label for="Boeking">Aantal vowassen</label>
-        <input type="number" id="volwassen" name="volwassen" required>
-        <label for="Boeking">Aantal kinderen</label>
-        <input type="number" id="kinderen" name="kinderen" >
-        <label for="Boeking">AnnulatieVerzekering</label>
-        <input type="checkbox" id="veerzekering" name="verzekering">
-        <button type="submit">Boeken</button>
+        <div>
+            <label for="Boeking">Aantal vowassen</label>
+            <input type="number" id="volwassen" name="volwassen" required>
+        </div>
+        <div>
+            <label for="Boeking">Aantal kinderen</label>
+            <input type="number" id="kinderen" name="kinderen">
+        </div>
+        <div>
+            <label for="Boeking">AnnulatieVerzekering</label>
+            <input type="checkbox" id="veerzekering" name="verzekering">
+            <button type="submit">Boeken</button>
+        </div>       
     </div>
 </form>
 
