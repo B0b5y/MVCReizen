@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MVCReizen.Models;
 
-namespace MVCReizen.Models
+namespace MVCReizen.Repositories
 {
     public class SQLReisRepository : IReisRepository
     {

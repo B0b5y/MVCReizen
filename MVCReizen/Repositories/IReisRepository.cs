@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using MVCReizen.Models;
 
-namespace MVCReizen.Models
+namespace MVCReizen.Repositories
 {
     public interface IReisRepository
     {

@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
 using MVCReizen.ModelView;
+using MVCReizen.Repositories;
 using System.Diagnostics;
 
 namespace MVCReizen.Controllers
