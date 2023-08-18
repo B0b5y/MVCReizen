@@ -100,8 +100,11 @@ namespace MVCReizen.Controllers
         public IActionResult KlarBoeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
         {
             var reis = _context.Reizen.Find(reisId);
-            var klant = _context.Klanten.Find(klantId);
-           
+            reis.AantalVolwassenen = volwassen;
+            reis.AantalKinderen = kinderen;
+            _reisRepository.UpdateReis(reis);
+
+            var klant = _context.Klanten.Find(klantId);      
                 var boeking = new Boeking
                 {
                     Reis = reis,
@@ -111,7 +114,6 @@ namespace MVCReizen.Controllers
                     AnnulatieVerzekering = verzekering,
                     GeboektOp = DateTime.Now
                 };
-            _reisRepository.UpdateReis(reis);
             _boekingsRepository.AddBoeking(boeking);
 
             return RedirectToAction(nameof(BoekingBewestigen), new { boekingId = boeking.Id });
