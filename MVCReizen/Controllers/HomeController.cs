@@ -82,10 +82,10 @@ namespace MVCReizen.Controllers
         public IActionResult Boeking(int reisId, int klantId)
         {
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
-            var klant = _context.Klanten.Find(klantId);
+            var klant = _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();
             var klantlijst = new List<Klant> { klant };
             var reisEnKlant = new ReisEnKlanten() { Reis = reis, Klanten = klantlijst };
-            return View();
+            return View(reisEnKlant);
         }
     }
 } 
