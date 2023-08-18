@@ -22,7 +22,7 @@
 
 
 <h1>Boeking</h1>
-<form method="post" action="~/Home/Boeking">
+<form method="post" action="~/Home/KlarBoeking">
     <div>
         <div>
             <label for="Boeking">Aantal vowassen</label>
@@ -35,7 +35,10 @@
         <div>
             <label for="Boeking">AnnulatieVerzekering</label>
             <input type="checkbox" id="veerzekering" name="verzekering">
+            <input type="hidden" name="reisId" value="@Model.Reis.Id" />
+            <input type="hidden" name="klantId" value="@Model.Klant.Id" />
             <button type="submit">Boeken</button>
+
         </div>       
     </div>
 </form>

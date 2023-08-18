@@ -5,6 +5,7 @@ using MVCReizen.Models;
 using MVCReizen.ModelView;
 using MVCReizen.Repositories;
 using System.Diagnostics;
+using System.Numerics;
 
 namespace MVCReizen.Controllers
 {
@@ -85,22 +86,31 @@ namespace MVCReizen.Controllers
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
             var klant = _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();           
             var reisEnKlant = new ReisEnKlant() { Reis = reis, Klant = klant};
-            var boeking = new Boeking
-            {
-                Reis = reis,
-                Klant = klant,
-                AantalVolwassenen = volwassen,
-                AantalKinderen = kinderen,
-                AnnulatieVerzekering = verzekering,
-                GeboektOp = DateTime.Now
-            };
+            
 
+            return View(reisEnKlant);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult KlarBoeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
+        {
+            var reis = _context.Reizen.Find(reisId);
+            var klant = _context.Klanten.Find(klantId);
+           
+                var boeking = new Boeking
+                {
+                    Reis = reis,
+                    Klant = klant,
+                    AantalVolwassenen = volwassen,
+                    AantalKinderen = kinderen,
+                    AnnulatieVerzekering = verzekering,
+                    GeboektOp = DateTime.Now
+                };
+                _context.Boekingen.Add(boeking);
+                _context.SaveChanges();
+            
             return View(boeking);
         }
-        //public IActionResult KlarBoeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
-        //{
-
-        //}
 
     }
 } 
