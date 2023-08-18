@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MVCReizen.Models;
 
-namespace MVCReizen.Repositories
+namespace MVCReizen.Models.Repositories
 {
     public class SQLReisRepository : IReisRepository
     {

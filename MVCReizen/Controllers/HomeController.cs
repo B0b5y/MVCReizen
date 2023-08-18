@@ -2,8 +2,8 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
+using MVCReizen.Models.Repositories;
 using MVCReizen.ModelView;
-using MVCReizen.Repositories;
 using System.Diagnostics;
 using System.Numerics;
 
@@ -13,13 +13,16 @@ namespace MVCReizen.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ReizenContext _context;
-        //private readonly IReisRepository _reisRepository;
+        private readonly IReisRepository _reisRepository;
+        
+        private readonly IBoekingsRepository _boekingsRepository;
 
-        public HomeController(ILogger<HomeController> logger, ReizenContext context/*, IReisRepository reisRepository*/)
+        public HomeController(ILogger<HomeController> logger, ReizenContext context, IReisRepository reisRepository, IBoekingsRepository boekingsRepository)
         {
             _logger = logger;
             _context = context;
-            //_reisRepository = reisRepository;
+            _reisRepository = reisRepository;
+            _boekingsRepository = boekingsRepository;
         }
 
         public IActionResult Index()
@@ -108,20 +111,17 @@ namespace MVCReizen.Controllers
                     AnnulatieVerzekering = verzekering,
                     GeboektOp = DateTime.Now
                 };
+            _reisRepository.UpdateReis(reis);
+            _boekingsRepository.AddBoeking(boeking);
 
-            //_reisRepository.UpdateReis(reis);
-            _context.Boekingen.Add(boeking);
-                _context.SaveChanges();
-            
-            
-            return Redirect("~/home/BoekingBewestigen");
+            return RedirectToAction(nameof(BoekingBewestigen), new { boekingId = boeking.Id });
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        public IActionResult BoekingBewestigen(/*int boekingId*/)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult BoekingBewestigen(int boekingId)
         {
-            //var boeking = _context.Boekingen.Find(boekingId);
-            return View(/*boeking*/);
+            var boeking = _context.Boekingen.Find(boekingId);
+            return View(boeking);
         }
 
     }
