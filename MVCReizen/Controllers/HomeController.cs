@@ -80,12 +80,27 @@ namespace MVCReizen.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Boeking(int reisId, int klantId)
+        public IActionResult Boeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
         {
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
             var klant = _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();           
             var reisEnKlant = new ReisEnKlant() { Reis = reis, Klant = klant};
-            return View(reisEnKlant);
+            var boeking = new Boeking
+            {
+                Reis = reis,
+                Klant = klant,
+                AantalVolwassenen = volwassen,
+                AantalKinderen = kinderen,
+                AnnulatieVerzekering = verzekering,
+                GeboektOp = DateTime.Now
+            };
+
+            return View(boeking);
         }
+        //public IActionResult KlarBoeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
+        //{
+
+        //}
+
     }
 } 
