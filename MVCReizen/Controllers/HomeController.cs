@@ -13,11 +13,13 @@ namespace MVCReizen.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ReizenContext _context;
+        //private readonly IReisRepository _reisRepository;
 
-        public HomeController(ILogger<HomeController> logger, ReizenContext context)
+        public HomeController(ILogger<HomeController> logger, ReizenContext context/*, IReisRepository reisRepository*/)
         {
             _logger = logger;
             _context = context;
+            //_reisRepository = reisRepository;
         }
 
         public IActionResult Index()
@@ -106,10 +108,20 @@ namespace MVCReizen.Controllers
                     AnnulatieVerzekering = verzekering,
                     GeboektOp = DateTime.Now
                 };
+
+                //_reisRepository.UpdateReis(reis);
                 _context.Boekingen.Add(boeking);
                 _context.SaveChanges();
             
-            return RedirectToAction("KlarBoeking");
+            
+            return Redirect("~/home/BoekingBewestigen");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult BoekingBewestigen(int boekingId)
+        {
+            var boeking = _context.Boekingen.Find(boekingId);
+            return View(boeking);
         }
 
     }
