@@ -109,19 +109,19 @@ namespace MVCReizen.Controllers
                     GeboektOp = DateTime.Now
                 };
 
-                //_reisRepository.UpdateReis(reis);
-                _context.Boekingen.Add(boeking);
+            //_reisRepository.UpdateReis(reis);
+            _context.Boekingen.Add(boeking);
                 _context.SaveChanges();
             
             
             return Redirect("~/home/BoekingBewestigen");
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult BoekingBewestigen(int boekingId)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public IActionResult BoekingBewestigen(/*int boekingId*/)
         {
-            var boeking = _context.Boekingen.Find(boekingId);
-            return View(boeking);
+            //var boeking = _context.Boekingen.Find(boekingId);
+            return View(/*boeking*/);
         }
 
     }
