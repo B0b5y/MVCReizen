@@ -74,18 +74,16 @@ namespace MVCReizen.Controllers
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis=>reis.BestemmingscodeNavigation).FirstOrDefault();
             var klanten = _context.Klanten.Where(klant => klant.Familienaam.Contains(klantZoeken))
                     .Include(klant => klant.Woonplaats).OrderBy(klant=>klant.Familienaam).ToList();
-            var reisEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };
-            TempData["reisId"] = reisId;
+            var reisEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };            
             return View(reisEnKlanten);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Boeking(/*int reisId, int klantId*/)
+        public IActionResult Boeking(int reisId, int klantId)
         {
-            //var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
-            //var klant = _context.Klanten.Find(klantId);
-            int reisId = (int)TempData["reisId"];
-            int klantId = (int)TempData["klantId"];
+            var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
+            var klant = _context.Klanten.Find(klantId);
+            
             return View();
         }
     }
