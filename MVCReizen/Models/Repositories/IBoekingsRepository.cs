@@ -6,7 +6,7 @@ namespace MVCReizen.Models.Repositories
 {
     public interface IBoekingsRepository
     {
-        Boeking GetReisById(int id);
+        Boeking GetBoekingById(int id);
         IEnumerable<Boeking> GetAllBoekingen();
         void AddBoeking(Boeking reis);
         void UpdateBoeking(Boeking reis);
