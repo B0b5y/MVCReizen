@@ -83,7 +83,8 @@ namespace MVCReizen.Controllers
         {
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
             var klant = _context.Klanten.Find(klantId);
-            
+            var klantlijst = new List<Klant> { klant };
+            var reisEnKlant = new ReisEnKlanten() { Reis = reis, Klanten = klantlijst };
             return View();
         }
     }
