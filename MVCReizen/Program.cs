@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ReizenContext>(options =>
  options.UseSqlServer(
- builder.Configuration.GetConnectionString("Reizen")));
+ builder.Configuration.GetConnectionString("ReizenConnection")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
