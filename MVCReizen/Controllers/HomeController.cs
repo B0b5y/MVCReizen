@@ -109,7 +109,7 @@ namespace MVCReizen.Controllers
                 _context.Boekingen.Add(boeking);
                 _context.SaveChanges();
             
-            return View(boeking);
+            return RedirectToAction("KlarBoeking");
         }
 
     }
