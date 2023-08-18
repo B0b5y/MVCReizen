@@ -5,6 +5,10 @@ using MVCReizen.Models.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<IBoekingsRepository,
+ SQLBoekingRepository>();
+builder.Services.AddTransient<IReisRepository,
+ SQLReisRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ReizenContext>(options =>
  options.UseSqlServer(
