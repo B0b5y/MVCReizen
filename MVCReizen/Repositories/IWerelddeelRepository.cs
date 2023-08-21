@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MVCReizen.Models;
 
-namespace MVCReizen.Models.Repositories
+namespace MVCReizen.Repositories
 {
     public interface IWerelddeelRepository
     {

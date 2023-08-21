@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MVCReizen.Models.Repositories
+namespace MVCReizen.Repositories
 {
     public class WerelddeelRepository : IWerelddeelRepository
     {

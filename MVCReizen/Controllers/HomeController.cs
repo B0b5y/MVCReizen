@@ -2,8 +2,8 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
-using MVCReizen.Models.Repositories;
 using MVCReizen.ModelView;
+using MVCReizen.Repositories;
 using System.Diagnostics;
 using System.Numerics;
 
@@ -14,7 +14,7 @@ namespace MVCReizen.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ReizenContext _context;
         private readonly IReisRepository _reisRepository;
-        
+
         private readonly IBoekingsRepository _boekingsRepository;
 
         public HomeController(ILogger<HomeController> logger, ReizenContext context, IReisRepository reisRepository, IBoekingsRepository boekingsRepository)
@@ -67,15 +67,14 @@ namespace MVCReizen.Controllers
             return View(reizen);
         }
         public IActionResult ZoekKlant(int id)
-        {          
+        {
             var gekozenReis = _context.Reizen.Where(reis => reis.Id == id)
                 .Include(reis => reis.BestemmingscodeNavigation)
                 .FirstOrDefault();
-            
+
             return View(gekozenReis);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public IActionResult Zoek(string klantZoeken, int reisId)
         {
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis=>reis.BestemmingscodeNavigation).FirstOrDefault();
@@ -99,29 +98,34 @@ namespace MVCReizen.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult KlarBoeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
         {
-            var reis = _context.Reizen.Find(reisId);
-            var hudigeVolwassen = _context.Reizen.Where(reis=>reis.Id == reisId).Select(reis=> reis.AantalVolwassenen).FirstOrDefault();
-            var hudigeKinderen = _context.Reizen.Where(reis => reis.Id == reisId).Select(reis => reis.AantalKinderen).FirstOrDefault();
-          
-            
-            var somVolvassenen = volwassen + hudigeVolwassen;
-            var somKinderen = kinderen + hudigeKinderen;
-            reis.AantalVolwassenen = somVolvassenen;
-            reis.AantalKinderen = somKinderen;
-            _reisRepository.UpdateReis(reis);
-            var klant = _context.Klanten.Find(klantId);
-            var boeking = new Boeking
+            if (this.ModelState.IsValid)
             {
-                Reis = reis,
-                Klant = klant,
-                AantalVolwassenen = volwassen,
-                AantalKinderen = kinderen,
-                AnnulatieVerzekering = verzekering,
-                GeboektOp = DateTime.Now
-                };
-            _boekingsRepository.AddBoeking(boeking);
+                var reis = _context.Reizen.Find(reisId);
+                var hudigeVolwassen = _context.Reizen.Where(reis => reis.Id == reisId).Select(reis => reis.AantalVolwassenen).FirstOrDefault();
+                var hudigeKinderen = _context.Reizen.Where(reis => reis.Id == reisId).Select(reis => reis.AantalKinderen).FirstOrDefault();
 
-            return RedirectToAction(nameof(BoekingBewestigen), new { boekingId = boeking.Id });
+
+                var somVolvassenen = volwassen + hudigeVolwassen;
+                var somKinderen = kinderen + hudigeKinderen;
+                reis.AantalVolwassenen = somVolvassenen;
+                reis.AantalKinderen = somKinderen;
+                _reisRepository.UpdateReis(reis);
+                var klant = _context.Klanten.Find(klantId);
+                var boeking = new Boeking
+                {
+                    Reis = reis,
+                    Klant = klant,
+                    AantalVolwassenen = volwassen,
+                    AantalKinderen = kinderen,
+                    AnnulatieVerzekering = verzekering,
+                    GeboektOp = DateTime.Now
+                };
+                _boekingsRepository.AddBoeking(boeking);
+
+                return RedirectToAction(nameof(BoekingBewestigen), new { boekingId = boeking.Id });
+            }
+           
+                return View(nameof(Boeking));                      
         }
         [HttpGet]
         

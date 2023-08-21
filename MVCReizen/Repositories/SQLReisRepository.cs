@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MVCReizen.Models;
 
-namespace MVCReizen.Models.Repositories
+namespace MVCReizen.Repositories
 {
     public class SQLReisRepository : IReisRepository
     {
@@ -33,7 +33,7 @@ namespace MVCReizen.Models.Repositories
         public void UpdateReis(Reis reis)
         {
             _context.Reizen.Update(reis);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public void DeleteReis(int id)

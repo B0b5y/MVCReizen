@@ -26,10 +26,12 @@
     <div>
         <div>
             <label for="Boeking">Aantal vowassen</label>
-            <input type="number" id="volwassen" name="volwassen" required>
+            <span asp-validation-for="Reis.AantalVolwassenen"></span>
+            <input type="number" id="volwassen" name="volwassen" required>            
         </div>
         <div>
             <label for="Boeking">Aantal kinderen</label>
+            <span asp-validation-for="Reis.AantalKinderen"></span>
             <input type="number" id="kinderen" name="kinderen">
         </div>
         <div>
@@ -39,7 +41,8 @@
             <input type="hidden" name="klantId" value="@Model.Klant.Id" />          
             <button type="submit">Boeken</button>
 
-        </div>       
+        </div>  
+        <div asp-validation-summary="All"></div>
     </div>
 </form>
 

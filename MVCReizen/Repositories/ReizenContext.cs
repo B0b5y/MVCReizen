@@ -7,7 +7,7 @@ using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
 
-namespace MVCReizen.Models.Repositories;
+namespace MVCReizen.Repositories;
 
 public partial class ReizenContext : DbContext
 {

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
-using MVCReizen.Models.Repositories;
+using MVCReizen.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

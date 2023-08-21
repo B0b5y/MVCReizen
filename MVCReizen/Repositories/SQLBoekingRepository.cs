@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MVCReizen.Models.Repositories;
+using MVCReizen.Models;
 
-namespace MVCReizen.Models.Repositories
+namespace MVCReizen.Repositories
 {
     public class SQLBoekingRepository : IBoekingsRepository
     {
