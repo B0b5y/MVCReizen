@@ -88,44 +88,55 @@ namespace MVCReizen.Controllers
         {
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
             var klant = _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();
-            var nieuweReisForm = new NieuweReisForm() { AantalVolwassenen = volwassen, AantalKinderen = kinderen, AnnulatieVerzekering = verzekering };
-            var reisEnKlant = new ReisKlantEnNieuweReisForm() { Reis = reis, Klant = klant, NieuweReisForm = nieuweReisForm  };
+            var nieuweReisForm = new NieuweReisForm() { 
+                AantalVolwassenen = volwassen, 
+                AantalKinderen = kinderen, 
+                AnnulatieVerzekering = verzekering,
+                KlantId = klantId,
+                ReisId = reisId
+            };
+            var reisEnKlant = new ReisKlantEnNieuweReisForm() { 
+                Reis = reis, 
+                Klant = klant, 
+                NieuweReisForm = nieuweReisForm  };
             
 
             return View(reisEnKlant);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult KlarBoeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
+        public IActionResult KlarBoeking(ReisKlantEnNieuweReisForm reisKlantEnNieuweReisForm)
         {
             if (this.ModelState.IsValid)
             {
-                var reis = _context.Reizen.Find(reisId);
-                var hudigeVolwassen = _context.Reizen.Where(reis => reis.Id == reisId).Select(reis => reis.AantalVolwassenen).FirstOrDefault();
-                var hudigeKinderen = _context.Reizen.Where(reis => reis.Id == reisId).Select(reis => reis.AantalKinderen).FirstOrDefault();
+                
+                var reis = _context.Reizen.Find(reisKlantEnNieuweReisForm.Reis.Id);
+                var hudigeVolwassen = _context.Reizen.Where(reis => reis.Id == reisKlantEnNieuweReisForm.Reis.Id).Select(reis => reis.AantalVolwassenen).FirstOrDefault();
+                var hudigeKinderen = _context.Reizen.Where(reis => reis.Id == reisKlantEnNieuweReisForm.Reis.Id).Select(reis => reis.AantalKinderen).FirstOrDefault();
 
 
-                var somVolvassenen = volwassen + hudigeVolwassen;
-                var somKinderen = kinderen + hudigeKinderen;
-                reis.AantalVolwassenen = somVolvassenen;
-                reis.AantalKinderen = somKinderen;
+                var somVolvassenen = reisKlantEnNieuweReisForm.NieuweReisForm.AantalVolwassenen + hudigeVolwassen;
+                var somKinderen = reisKlantEnNieuweReisForm.NieuweReisForm.AantalKinderen + hudigeKinderen;
+                reis.AantalVolwassenen = (int)somVolvassenen;
+                reis.AantalKinderen = (int)somKinderen;
                 _reisRepository.UpdateReis(reis);
-                var klant = _context.Klanten.Find(klantId);
+                var klant = _context.Klanten.Find(reisKlantEnNieuweReisForm.Klant.Id);
                 var boeking = new Boeking
                 {
                     Reis = reis,
                     Klant = klant,
-                    AantalVolwassenen = volwassen,
-                    AantalKinderen = kinderen,
-                    AnnulatieVerzekering = verzekering,
+                    AantalVolwassenen = reisKlantEnNieuweReisForm.NieuweReisForm.AantalVolwassenen,
+                    AantalKinderen = reisKlantEnNieuweReisForm.NieuweReisForm.AantalKinderen,
+                    AnnulatieVerzekering = reisKlantEnNieuweReisForm.NieuweReisForm.AnnulatieVerzekering,
                     GeboektOp = DateTime.Now
                 };
                 _boekingsRepository.AddBoeking(boeking);
-
+                
                 return RedirectToAction(nameof(BoekingBewestigen), new { boekingId = boeking.Id });
             }
+
+            return View(nameof(Boeking), reisKlantEnNieuweReisForm);
            
-                return View(nameof(Boeking));                      
         }
         [HttpGet]
         

@@ -13,6 +13,8 @@ namespace MVCReizen.ModelView
         public int? AantalKinderen { get; set; }
 
         public bool AnnulatieVerzekering { get; set; }
+        public int KlantId { get; set; }
+        public int ReisId { get; set; }
     }
 }
 

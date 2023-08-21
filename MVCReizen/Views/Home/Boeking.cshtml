@@ -28,18 +28,18 @@
         <div>
             <label asp-for="@Model.NieuweReisForm.AantalVolwassenen">Aantal vowassen</label>
             <span asp-validation-for="@Model.NieuweReisForm.AantalVolwassenen"></span>
-            <input type="number" id="volwassen" name="volwassen" value="@Model.NieuweReisForm.AantalVolwassenen" required>            
+            <input type="number" asp-for="@Model.NieuweReisForm.AantalVolwassenen">
         </div>
         <div>
             <label asp-for="@Model.NieuweReisForm.AantalKinderen">Aantal kinderen</label>
             <span asp-validation-for="@Model.NieuweReisForm.AantalKinderen"></span>
-            <input type="number" id="kinderen"  value="@Model.NieuweReisForm.AantalKinderen" name="kinderen">
+            <input type="number" asp-for="@Model.NieuweReisForm.AantalKinderen">
         </div>
         <div>
             <label for="Boeking">@Model.NieuweReisForm.AnnulatieVerzekering</label>
-            <input type="checkbox" id="verzekering" name="verzekering">
-            <input type="hidden" name="reisId" value="@Model.Reis.Id" />
-            <input type="hidden" name="klantId" value="@Model.Klant.Id" />          
+            <input type="checkbox" asp-for="@Model.NieuweReisForm.AnnulatieVerzekering">
+            <input type="hidden" asp-for="@Model.NieuweReisForm.KlantId" />
+            <input type="hidden" asp-for="@Model.NieuweReisForm.ReisId" />
             <button type="submit">Boeken</button>
 
         </div>  
