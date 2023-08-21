@@ -83,13 +83,13 @@ namespace MVCReizen.Controllers
             var reisEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };            
             return View(reisEnKlanten);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public IActionResult Boeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
         {
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
-            var klant = _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();           
-            var reisEnKlant = new ReisEnKlant() { Reis = reis, Klant = klant};
+            var klant = _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();
+            var nieuweReisForm = new NieuweReisForm() { AantalVolwassenen = volwassen, AantalKinderen = kinderen, AnnulatieVerzekering = verzekering };
+            var reisEnKlant = new ReisKlantEnNieuweReisForm() { Reis = reis, Klant = klant, NieuweReisForm = nieuweReisForm  };
             
 
             return View(reisEnKlant);

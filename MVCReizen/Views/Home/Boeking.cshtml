@@ -1,6 +1,7 @@
-﻿@model ReisEnKlant;
+﻿@model ReisKlantEnNieuweReisForm;
 @using MVCReizen.Models;
 @using MVCReizen.Controllers;
+@using MVCReizen.ModelView;
 @{
     ViewData["Title"] = "Boeking";
 }
@@ -22,20 +23,20 @@
 
 
 <h1>Boeking</h1>
-<form method="post" action="~/Home/KlarBoeking">
+<form method="post" asp-action="KlarBoeking" asp-controller="home">
     <div>
         <div>
-            <label for="Boeking">Aantal vowassen</label>
-            <span asp-validation-for="Reis.AantalVolwassenen"></span>
-            <input type="number" id="volwassen" name="volwassen" required>            
+            <label asp-for="@Model.NieuweReisForm.AantalVolwassenen">Aantal vowassen</label>
+            <span asp-validation-for="@Model.NieuweReisForm.AantalVolwassenen"></span>
+            <input type="number" id="volwassen" name="volwassen" value="@Model.NieuweReisForm.AantalVolwassenen" required>            
         </div>
         <div>
-            <label for="Boeking">Aantal kinderen</label>
-            <span asp-validation-for="Reis.AantalKinderen"></span>
-            <input type="number" id="kinderen" name="kinderen">
+            <label asp-for="@Model.NieuweReisForm.AantalKinderen">Aantal kinderen</label>
+            <span asp-validation-for="@Model.NieuweReisForm.AantalKinderen"></span>
+            <input type="number" id="kinderen"  value="@Model.NieuweReisForm.AantalKinderen" name="kinderen">
         </div>
         <div>
-            <label for="Boeking">AnnulatieVerzekering</label>
+            <label for="Boeking">@Model.NieuweReisForm.AnnulatieVerzekering</label>
             <input type="checkbox" id="verzekering" name="verzekering">
             <input type="hidden" name="reisId" value="@Model.Reis.Id" />
             <input type="hidden" name="klantId" value="@Model.Klant.Id" />          
