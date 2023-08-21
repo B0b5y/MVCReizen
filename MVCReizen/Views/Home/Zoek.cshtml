@@ -40,8 +40,8 @@
                     <td>@klant.Woonplaats.Naam</td>
                     <td>
                     <form method="get" action="~/Home/boeking">
-                        <input type="hidden" name="reisId" value="@Model.Reis.Id" />
-                        <input type="hidden" name="klantId" value="@klant.Id" />
+                        <input type="hidden" value="@Model.Reis.Id" name="reisId"/>
+                        <input type="hidden" value="@klant.Id" name="klantId"/>
                         <button type="submit">Boeken</button>
                     </form>
                     </td>

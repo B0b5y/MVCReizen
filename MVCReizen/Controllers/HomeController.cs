@@ -84,14 +84,11 @@ namespace MVCReizen.Controllers
             return View(reisEnKlanten);
         }
         [HttpGet]
-        public IActionResult Boeking(int reisId, int klantId, int volwassen, int kinderen, bool verzekering)
+        public IActionResult Boeking(int reisId, int klantId)
         {
             var reis = _context.Reizen.Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
             var klant = _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();
             var nieuweReisForm = new NieuweReisForm() { 
-                AantalVolwassenen = volwassen, 
-                AantalKinderen = kinderen, 
-                AnnulatieVerzekering = verzekering,
                 KlantId = klantId,
                 ReisId = reisId
             };
@@ -109,18 +106,12 @@ namespace MVCReizen.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                
-                var reis = _context.Reizen.Find(reisKlantEnNieuweReisForm.Reis.Id);
-                var hudigeVolwassen = _context.Reizen.Where(reis => reis.Id == reisKlantEnNieuweReisForm.Reis.Id).Select(reis => reis.AantalVolwassenen).FirstOrDefault();
-                var hudigeKinderen = _context.Reizen.Where(reis => reis.Id == reisKlantEnNieuweReisForm.Reis.Id).Select(reis => reis.AantalKinderen).FirstOrDefault();
 
-
-                var somVolvassenen = reisKlantEnNieuweReisForm.NieuweReisForm.AantalVolwassenen + hudigeVolwassen;
-                var somKinderen = reisKlantEnNieuweReisForm.NieuweReisForm.AantalKinderen + hudigeKinderen;
-                reis.AantalVolwassenen = (int)somVolvassenen;
-                reis.AantalKinderen = (int)somKinderen;
+                var reis = _context.Reizen.Find(reisKlantEnNieuweReisForm.NieuweReisForm.ReisId) ;
+                reis.AantalVolwassenen += (int)reisKlantEnNieuweReisForm.NieuweReisForm.AantalVolwassenen;
+                reis.AantalKinderen = (int)reisKlantEnNieuweReisForm.NieuweReisForm.AantalKinderen;
                 _reisRepository.UpdateReis(reis);
-                var klant = _context.Klanten.Find(reisKlantEnNieuweReisForm.Klant.Id);
+                var klant = _context.Klanten.Find(reisKlantEnNieuweReisForm.NieuweReisForm.KlantId);
                 var boeking = new Boeking
                 {
                     Reis = reis,
@@ -135,6 +126,13 @@ namespace MVCReizen.Controllers
                 return RedirectToAction(nameof(BoekingBewestigen), new { boekingId = boeking.Id });
             }
 
+            reisKlantEnNieuweReisForm.Klant = _context.Klanten
+                .Where(klant => klant.Id == reisKlantEnNieuweReisForm.NieuweReisForm.KlantId)
+                .Include(klant => klant.Woonplaats).FirstOrDefault();
+            reisKlantEnNieuweReisForm.Reis = _context.Reizen
+                .Where(reis => reis.Id == reisKlantEnNieuweReisForm.NieuweReisForm.ReisId)
+                .Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
+                
             return View(nameof(Boeking), reisKlantEnNieuweReisForm);
            
         }

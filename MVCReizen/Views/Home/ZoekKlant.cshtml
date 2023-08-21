@@ -18,9 +18,9 @@
 <p>@Model.PrijsPerPersoon</p>
 <form method="get" action="~/Home/Zoek">
     <div>
-        <label for="KlantZoeken">Familienaam bevat:</label>
-        <input type="text" id="klantZoeken" name="klantZoeken" required>
-        <input type="hidden" name="reisId" value="@Model.Id" />
+        <label for="klantZoeken">Familienaam bevat:</label>
+        <input type="text" for="klantZoeken" name="klantZoeken" required>
+        <input type="hidden" value="@Model.Id" name="reisId" />
         <button type="submit">Zoeken</button>
     </div>
 </form>
