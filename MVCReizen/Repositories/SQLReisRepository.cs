@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
+using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
 
 namespace MVCReizen.Repositories
@@ -14,7 +13,7 @@ namespace MVCReizen.Repositories
             _context = context;
         }
 
-        public Reis GetReisById(int id)
+        public Reis? GetReisById(int id)
         {
             return _context.Reizen.Find(id);
         }
@@ -23,7 +22,9 @@ namespace MVCReizen.Repositories
         {
             return _context.Reizen.ToList();
         }
-
+        public IEnumerable<Reis> GetAllReizenMetBestemmingen() => _context.Reizen
+                    .Include(reis => reis.BestemmingscodeNavigation).ToList();
+        
 
         public void UpdateReis(Reis reis)
         {

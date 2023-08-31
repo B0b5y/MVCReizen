@@ -9,7 +9,7 @@ namespace MVCReizen.Repositories
         {
             _context = context;
         }
-        public IEnumerable<Klant> GetAllKlanten()
+        public IQueryable<Klant> GetAllKlanten()
         {
             return _context.Klanten;
         }

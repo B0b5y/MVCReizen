@@ -75,8 +75,8 @@ namespace MVCReizen.Controllers
         }
         public IActionResult ZoekKlant(int id)
         {
-            var gekozenReis = reisService.GetAllReizen().Where(reis => reis.Id == id)
-                .Include(reis => reis.BestemmingscodeNavigation)
+            var gekozenReis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == id)
+                
                 .FirstOrDefault();
 
             return View(gekozenReis);
@@ -84,8 +84,8 @@ namespace MVCReizen.Controllers
         [HttpGet]
         public IActionResult Zoek(string klantZoeken, int reisId)
         {
-            var reis = reisService.GetAllReizen().Where(reis => reis.Id == reisId)
-                    .Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
+            var reis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == reisId)
+                    .FirstOrDefault();
             var klanten = klantService.GetAllKlanten().Where(klant => klant.Familienaam.Contains(klantZoeken))
                     .Include(klant => klant.Woonplaats).OrderBy(klant => klant.Familienaam).ToList();
             var reisEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };
@@ -94,7 +94,8 @@ namespace MVCReizen.Controllers
         [HttpGet]
         public IActionResult Boeking(int reisId, int klantId)
         {
-            var reis = reisService.GetAllReizen().Where(reis => reis.Id == reisId).Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
+            var reis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == reisId)
+                .FirstOrDefault();
             var klant = klantService.GetAllKlanten().Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();
             var nieuweReisForm = new NieuweReisForm()
             {
@@ -140,9 +141,9 @@ namespace MVCReizen.Controllers
             reisKlantEnNieuweReisForm.Klant = klantService.GetAllKlanten()
                 .Where(klant => klant.Id == reisKlantEnNieuweReisForm.NieuweReisForm.KlantId)
                 .Include(klant => klant.Woonplaats).FirstOrDefault();
-            reisKlantEnNieuweReisForm.Reis = reisService.GetAllReizen()
+            reisKlantEnNieuweReisForm.Reis = reisService.GetAllReizenMetBetemmingen()
                 .Where(reis => reis.Id == reisKlantEnNieuweReisForm.NieuweReisForm.ReisId)
-                .Include(reis => reis.BestemmingscodeNavigation).FirstOrDefault();
+                .FirstOrDefault();
 
             return View(nameof(Boeking), reisKlantEnNieuweReisForm);
 

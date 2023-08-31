@@ -7,5 +7,6 @@ namespace MVCReizen.Repositories
     {
         IEnumerable<Werelddeel> GetAllWerelddelen();
         Werelddeel GetWerelddeelById(int id);
+    }
        
 }
