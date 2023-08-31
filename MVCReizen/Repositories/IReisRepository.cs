@@ -7,9 +7,8 @@ namespace MVCReizen.Repositories
     public interface IReisRepository
     {
         Reis GetReisById(int id);
-        IEnumerable<Reis> GetAllReizen();
-        void AddReis(Reis reis);
+        IEnumerable<Reis> GetAllReizen();   
         void UpdateReis(Reis reis);
-        void DeleteReis(int id);
+        
     }
 }

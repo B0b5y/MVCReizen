@@ -25,26 +25,7 @@ namespace MVCReizen.Repositories
             return _context.Werelddelen.Find(id);
         }
 
-        public void AddWerelddeel(Werelddeel werelddeel)
-        {
-            _context.Werelddelen.Add(werelddeel);
-            _context.SaveChanges();
-        }
 
-        public void UpdateWerelddeel(Werelddeel werelddeel)
-        {
-            _context.Werelddelen.Update(werelddeel);
-            _context.SaveChanges();
-        }
-
-        public void DeleteWerelddeel(int id)
-        {
-            var werelddeel = _context.Werelddelen.Find(id);
-            if (werelddeel != null)
-            {
-                _context.Werelddelen.Remove(werelddeel);
-                _context.SaveChanges();
-            }
-        }
+     
     }
 }

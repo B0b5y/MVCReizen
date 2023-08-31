@@ -24,11 +24,6 @@ namespace MVCReizen.Repositories
             return _context.Reizen.ToList();
         }
 
-        public void AddReis(Reis reis)
-        {
-            _context.Reizen.Add(reis);
-            _context.SaveChanges();
-        }
 
         public void UpdateReis(Reis reis)
         {
@@ -36,14 +31,7 @@ namespace MVCReizen.Repositories
             //_context.SaveChanges();
         }
 
-        public void DeleteReis(int id)
-        {
-            var reis = _context.Reizen.Find(id);
-            if (reis != null)
-            {
-                _context.Reizen.Remove(reis);
-                _context.SaveChanges();
-            }
-        }
+           
+        
     }
 }

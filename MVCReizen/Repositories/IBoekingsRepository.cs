@@ -9,7 +9,6 @@ namespace MVCReizen.Repositories
         Boeking GetBoekingById(int id);
         IEnumerable<Boeking> GetAllBoekingen();
         void AddBoeking(Boeking reis);
-        void UpdateBoeking(Boeking reis);
-        void DeleteBoeking(int id);
+        
     }
 }
