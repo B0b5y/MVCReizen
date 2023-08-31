@@ -4,7 +4,7 @@ namespace MVCReizen.Repositories
 {
     public interface IBestemmingRepository
     {
-        Bestemming GetBestemmingById(int id);
+        Bestemming GetBestemmingByCode(string id);
         IEnumerable<Bestemming> GetAllBestemmingen();
     }
 }

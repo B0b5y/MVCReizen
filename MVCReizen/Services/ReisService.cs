@@ -5,7 +5,7 @@ namespace MVCReizen.Services
     public class ReisService
     {
         private readonly IReisRepository reisRepository;
-        private readonly ReisService reisService;
+        
         public ReisService(IReisRepository reisRepository)
         {
             this.reisRepository = reisRepository;

@@ -5,7 +5,7 @@ using MVCReizen.Models;
 
 namespace MVCReizen.Repositories
 {
-    public class SQLBoekingRepository : IBoekingsRepository
+    public class SQLBoekingRepository : IBoekingRepository
     {
         private readonly ReizenContext _context;
 

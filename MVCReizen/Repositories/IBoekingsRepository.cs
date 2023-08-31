@@ -4,7 +4,7 @@ using MVCReizen.Models;
 
 namespace MVCReizen.Repositories
 {
-    public interface IBoekingsRepository
+    public interface IBoekingRepository
     {
         Boeking GetBoekingById(int id);
         IEnumerable<Boeking> GetAllBoekingen();

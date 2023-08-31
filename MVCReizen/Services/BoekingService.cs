@@ -3,25 +3,25 @@ using MVCReizen.Repositories;
 
 namespace MVCReizen.Services
 {
-    public class BoekingsService
+    public class BoekingService
     {
-        private readonly IBoekingsRepository boekingsRepository;
-        private readonly BoekingsService boekingsService;
-        public BoekingsService(IBoekingsRepository boekingsRepository)
+        private readonly IBoekingRepository boekingRepository;
+        
+        public BoekingService(IBoekingRepository boekingRepository)
         {
-            this.boekingsRepository = boekingsRepository;
+            this.boekingRepository = boekingRepository;
         }
         public Boeking? GetBoekingById(int id)
         {
-            return boekingsRepository.GetBoekingById(id);
+            return boekingRepository.GetBoekingById(id);
         }
         public IEnumerable<Boeking> GetAllBoekingen()
         {
-            return boekingsRepository.GetAllBoekingen();
+            return boekingRepository.GetAllBoekingen();
         }
         public void AddBoeking(Boeking reis)
         {
-            boekingsRepository.AddBoeking(reis);
+            boekingRepository.AddBoeking(reis);
         }
    
     }

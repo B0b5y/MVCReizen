@@ -7,7 +7,7 @@ namespace MVCReizen.Repositories
         private readonly ReizenContext _context;
         public SQLBestemmingRepository(ReizenContext context)
         {
-        _context = context;
+            _context = context;
         }
 
         public IEnumerable<Bestemming> GetAllBestemmingen()
@@ -15,7 +15,7 @@ namespace MVCReizen.Repositories
             return _context.Bestemmingen;
         }
 
-        public Bestemming? GetBestemmingById(int id)
+        public Bestemming? GetBestemmingByCode(string id)
         {
             return _context.Bestemmingen.Find(id);
         }
