@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
 using MVCReizen.Repositories;
+using System.Linq;
 
 namespace MVCReizen.Services
 {
@@ -12,7 +13,7 @@ namespace MVCReizen.Services
             this.klantRepository = klantRepository;
         }
 
-        public IEnumerable<Klant> GetAllKlanten()
+        public IQueryable<Klant> GetAllKlanten()
         {
             return klantRepository.GetAllKlanten();
         }

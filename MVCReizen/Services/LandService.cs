@@ -19,5 +19,6 @@ namespace MVCReizen.Services
         public Land? GetLandById(int id)
         {
             return landRepository.GetLandById(id);
+        }
     }
 }

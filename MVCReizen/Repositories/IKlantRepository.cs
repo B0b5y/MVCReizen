@@ -5,6 +5,6 @@ namespace MVCReizen.Repositories
     public interface IKlantRepository
     {
         Klant GetKlantById(int id);
-        IEnumerable<Klant> GetAllKlanten();
+        IQueryable<Klant> GetAllKlanten();
     }
 }

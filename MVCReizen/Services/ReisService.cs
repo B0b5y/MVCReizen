@@ -23,6 +23,10 @@ namespace MVCReizen.Services
         {
             reisRepository.UpdateReis(reis);
         }
+        public IEnumerable<Reis>GetAllReizenMetBetemmingen()
+        {
+            return reisRepository.GetAllReizenMetBestemmingen();
+        }
 
         
     }
