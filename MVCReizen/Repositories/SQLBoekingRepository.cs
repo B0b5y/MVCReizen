@@ -5,7 +5,7 @@ using MVCReizen.Models;
 
 namespace MVCReizen.Repositories
 {
-    public class SQLBoekingRepository : IBoekingsRepository
+    public class SQLBoekingRepository : IBoekingRepository
     {
         private readonly ReizenContext _context;
 
@@ -14,7 +14,7 @@ namespace MVCReizen.Repositories
             _context = context;
         }
 
-        public Boeking GetBoekingById(int id)
+        public Boeking? GetBoekingById(int id)
         {
             return _context.Boekingen.Find(id);
         }
@@ -30,20 +30,7 @@ namespace MVCReizen.Repositories
             _context.SaveChanges();
         }
 
-        public void UpdateBoeking(Boeking boeking)
-        {
-            _context.Boekingen.Update(boeking);
-            _context.SaveChanges();
-        }
 
-        public void DeleteBoeking(int id)
-        {
-            var boeking = _context.Boekingen.Find(id);
-            if (boeking != null)
-            {
-                _context.Boekingen.Remove(boeking);
-                _context.SaveChanges();
-            }
-        }
+        
     }
 }

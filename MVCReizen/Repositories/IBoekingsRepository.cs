@@ -4,12 +4,11 @@ using MVCReizen.Models;
 
 namespace MVCReizen.Repositories
 {
-    public interface IBoekingsRepository
+    public interface IBoekingRepository
     {
         Boeking GetBoekingById(int id);
         IEnumerable<Boeking> GetAllBoekingen();
         void AddBoeking(Boeking reis);
-        void UpdateBoeking(Boeking reis);
-        void DeleteBoeking(int id);
+        
     }
 }

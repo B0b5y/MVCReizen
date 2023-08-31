@@ -1,14 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
 using MVCReizen.Repositories;
+using MVCReizen.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddTransient<IBoekingsRepository,
+builder.Services.AddTransient<LandService>();
+builder.Services.AddTransient<BoekingService>();
+builder.Services.AddTransient<ReisService>();
+builder.Services.AddTransient<WerelddeelService>();
+builder.Services.AddTransient<KlantService>();
+builder.Services.AddTransient<BestemmingService>();
+builder.Services.AddTransient<IKlantRepository,
+ SQLKlantRepository>();
+builder.Services.AddTransient<IBestemmingRepository,
+ SQLBestemmingRepository>();
+builder.Services.AddTransient<IBoekingRepository,
  SQLBoekingRepository>();
 builder.Services.AddTransient<IReisRepository,
  SQLReisRepository>();
+builder.Services.AddTransient<IWerelddeelRepository,
+ WerelddeelRepository>();
+builder.Services.AddTransient<ILandRepository,
+ SQLLandRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ReizenContext>(options =>
  options.UseSqlServer(
