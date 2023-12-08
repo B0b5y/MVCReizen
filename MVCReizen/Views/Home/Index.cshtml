@@ -6,8 +6,9 @@
     ViewData["Title"] = "Welkompagina";
 }
 <h1>Werelddelen</h1>
+<ul style="align-items:center">
 @foreach (var werelddeel in Model)
 {
-    <p><a asp-action="ToonLanden" asp-route-id="@werelddeel.Id">@werelddeel.Naam</a></p>
+            <li><a asp-action="ToonLanden" asp-route-id="@werelddeel.Id">@werelddeel.Naam</a></li>
 }
-
+</ul>

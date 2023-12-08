@@ -12,9 +12,10 @@
     var imagePath = $"~/images/{ViewBag.LandNaam}.png";
 }
 <img src="@Url.Content(imagePath)" alt="image">
-
-@foreach (var bestemming in Model)
+<ul style="align-items:center">
+    @foreach (var bestemming in Model)
 {
    
-    <p><a asp-action="ToonReizen" asp-route-id="@bestemming.Code">@bestemming.Plaats</a></p>
+    <li><a asp-action="ToonReizen" asp-route-id="@bestemming.Code">@bestemming.Plaats</a></li>
 }
+</ul>
