@@ -9,7 +9,6 @@ namespace MVCReizen.Controllers
     {
         private readonly KlantService klantService;
         private readonly ReisService reisService;
-        private readonly ILogger<BestemmingController> _logger;
         public IActionResult Index()
         {
             return View();
@@ -18,16 +17,13 @@ namespace MVCReizen.Controllers
            ReisService reisService,
            KlantService klantService)
         {
-
             this.reisService = reisService;
             this.klantService = klantService;
         }
         public IActionResult ZoekKlant(int id)
         {
             var gekozenReis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == id)
-
                 .FirstOrDefault();
-
             return View(gekozenReis);
         }
         [HttpGet]

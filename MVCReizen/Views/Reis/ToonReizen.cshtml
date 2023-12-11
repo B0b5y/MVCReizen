@@ -31,7 +31,7 @@
                 <td>@reis.Vertrek.ToString("dd MMM yyyy")</td>
                 <td>@reis.PrijsPerPersoon</td>
                 <td>@reis.AantalDagen</td>
-                <td><a asp-action="ZoekKlant" asp-route-id="@reis.Id">Boeken</a></td>
+                <td><a asp-action="ZoekKlant" asp-controller="Klant" asp-route-id="@reis.Id">Boeken</a></td>
             </tr>
         }
     </tbody>
