@@ -21,8 +21,7 @@ namespace MVCReizen.Controllers
             ReisService reisService, BoekingService boekingService, WerelddeelService werelddeelService,
             KlantService klantService,  BestemmingService bestemmingService, LandService landService)
         {
-            _logger = logger;
-      
+            _logger = logger;      
             this.boekingService = boekingService;
             this.reisService = reisService;
             this.werelddeelService = werelddeelService;
@@ -30,7 +29,6 @@ namespace MVCReizen.Controllers
             this.klantService = klantService;
             this.landService = landService;
         }
-
         public IActionResult Index()
         {
             var werelddelen = werelddeelService.GetAllWerelddelen().OrderBy(werelddeel => werelddeel.Naam).ToList();
@@ -47,50 +45,7 @@ namespace MVCReizen.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        public IActionResult ToonLanden(int id)
-        {
-            var landen = landService.GetAllLanden().Where(land => land.Werelddeelid == id).OrderBy(land => land.Naam).ToList();
-            var werelddeelNaam = werelddeelService.GetAllWerelddelen().Where(werelddeel => werelddeel.Id == id)
-                                                 .Select(werelddeel => werelddeel.Naam).FirstOrDefault();
-            ViewBag.WerelddeelNaam = werelddeelNaam;
-            return View(landen);
-        }
-        public IActionResult ToonBestemmingen(int id)
-        {
-            
-            var bestemmingen = bestemmingService.GetAllBestemmingen().Where(bestemming => bestemming.Landid == id)
-                                                    .OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
-            var landNaam = landService.GetAllLanden().Where(land => land.Id == id).Select(land => land.Naam).FirstOrDefault();
-            ViewBag.LandNaam = landNaam;
-            return View(bestemmingen);
-        }
-        public IActionResult ToonReizen(string id)
-        {
-            var reizen = reisService.GetAllReizen().Where(reis => reis.Bestemmingscode == id)
-                                                 .OrderBy(reizen => reizen.Vertrek).ToList();
-            var bestemming = bestemmingService.GetBestemmingByCode(id);
-            ViewBag.BestemmingsNaam = bestemming.Plaats;
-            return View(reizen);
-        }
-        public IActionResult ZoekKlant(int id)
-        {
-            var gekozenReis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == id)
-                
-                .FirstOrDefault();
-
-            return View(gekozenReis);
-        }
-        [HttpGet]
-        public IActionResult Zoek(string klantZoeken, int reisId)
-        {
-            var reis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == reisId)
-                    .FirstOrDefault();
-            var klanten = klantService.GetAllKlanten().Where(klant => klant.Familienaam.Contains(klantZoeken))
-                    .Include(klant => klant.Woonplaats).OrderBy(klant => klant.Familienaam).ToList();
-            var reisEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };
-            return View(reisEnKlanten);
-        }
+        }     
         [HttpGet]
         public IActionResult Boeking(int reisId, int klantId)
         {
@@ -108,8 +63,6 @@ namespace MVCReizen.Controllers
                 Klant = klant,
                 NieuweReisForm = nieuweReisForm
             };
-
-
             return View(reisEnKlant);
         }
         [HttpPost]
@@ -118,7 +71,6 @@ namespace MVCReizen.Controllers
         {
             if (this.ModelState.IsValid)
             {
-
                 var reis = reisService.GetReisById(reisKlantEnNieuweReisForm.NieuweReisForm.ReisId);
                 reis.AantalVolwassenen += (int)reisKlantEnNieuweReisForm.NieuweReisForm.AantalVolwassenen;
                 reis.AantalKinderen = (int)reisKlantEnNieuweReisForm.NieuweReisForm.AantalKinderen;
@@ -134,28 +86,21 @@ namespace MVCReizen.Controllers
                     GeboektOp = DateTime.Now
                 };
                 boekingService.AddBoeking(boeking);
-
                 return RedirectToAction(nameof(BoekingBewestigen), new { boekingId = boeking.Id });
             }
-
             reisKlantEnNieuweReisForm.Klant = klantService.GetAllKlanten()
                 .Where(klant => klant.Id == reisKlantEnNieuweReisForm.NieuweReisForm.KlantId)
                 .Include(klant => klant.Woonplaats).FirstOrDefault();
             reisKlantEnNieuweReisForm.Reis = reisService.GetAllReizenMetBetemmingen()
                 .Where(reis => reis.Id == reisKlantEnNieuweReisForm.NieuweReisForm.ReisId)
                 .FirstOrDefault();
-
             return View(nameof(Boeking), reisKlantEnNieuweReisForm);
-
         }
         [HttpGet]
-
         public IActionResult BoekingBewestigen(int boekingId)
         {
             var boeking = new Boeking { Id = boekingId };
-
             return View(boeking);
         }
-
     }
 } 

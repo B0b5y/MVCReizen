@@ -9,6 +9,6 @@
 <ul style="align-items:center">
 @foreach (var werelddeel in Model)
 {
-            <li><a asp-action="ToonLanden" asp-route-id="@werelddeel.Id">@werelddeel.Naam</a></li>
+            <li><a asp-action="ToonLanden" asp-controller="Land" asp-route-id="@werelddeel.Id">@werelddeel.Naam</a></li>
 }
 </ul>

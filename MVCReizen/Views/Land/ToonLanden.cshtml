@@ -7,9 +7,9 @@
 }
 <h1>@ViewBag.WerelddeelNaam</h1>
 <ul style="align-items:center">
-@foreach (var land in Model)
-{
-   
-    <li><a asp-action="ToonBestemmingen" asp-route-id="@land.Id">@land.Naam</a></li>
-}
+    @foreach (var land in Model)
+    {
+
+        <li><a asp-action="ToonBestemmingen" asp-controller="Land" asp-route-id="@land.Id">@land.Naam</a></li>
+    }
 </ul>

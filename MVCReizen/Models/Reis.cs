@@ -9,6 +9,7 @@ public partial class Reis
     public int Id { get; set; }
 
     public string Bestemmingscode { get; set; } = null!;
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
 
     public DateTime Vertrek { get; set; }
 

@@ -10,7 +10,7 @@ namespace MVCReizen.ModelView
         [Range(1, 100, ErrorMessage = "De minimum- en maximumwaarden zijn : {1} en {2}")]
         public int? AantalVolwassenen { get; set; }
         [Range(0, 100, ErrorMessage = "De minimum- en maximumwaarden zijn : {1} en {2}")]
-        public int? AantalKinderen { get; set; }
+        public int AantalKinderen { get; set; }
 
         public bool AnnulatieVerzekering { get; set; }
         public int KlantId { get; set; }
