@@ -1,4 +1,4 @@
-﻿﻿@model List<Bestemming>
+﻿@model List<Bestemming>;
 @using MVCReizen.Models;
 @using MVCReizen.Controllers;
 
@@ -16,6 +16,6 @@
     @foreach (var bestemming in Model)
 {
    
-    <li><a asp-action="ToonReizen" asp-controller="Bestemming" asp-route-id="@bestemming.Code">@bestemming.Plaats</a></li>
+    <li><a asp-action="ToonReizen" asp-controller="Reis" asp-route-id="@bestemming.Code">@bestemming.Plaats</a></li>
 }
 </ul>

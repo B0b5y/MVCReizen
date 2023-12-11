@@ -10,6 +10,6 @@
     @foreach (var land in Model)
     {
 
-        <li><a asp-action="ToonBestemmingen" asp-controller="Land" asp-route-id="@land.Id">@land.Naam</a></li>
+        <li><a asp-action="ToonBestemmingen" asp-controller="Bestemming" asp-route-id="@land.Id">@land.Naam</a></li>
     }
 </ul>
