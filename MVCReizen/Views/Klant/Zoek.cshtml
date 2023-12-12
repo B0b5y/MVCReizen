@@ -39,7 +39,7 @@
                 <td>@klant.Woonplaats.Postcode</td>
                 <td>@klant.Woonplaats.Naam</td>
                 <td>
-                    <form method="get" action="~/Home/boeking">
+                    <form method="get" action="~/boeking/boeking">
                         <input type="hidden" value="@Model.Reis.Id" name="reisId" />
                         <input type="hidden" value="@klant.Id" name="klantId" />
                         <button type="submit">Boeken</button>
