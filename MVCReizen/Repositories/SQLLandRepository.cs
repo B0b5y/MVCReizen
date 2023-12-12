@@ -22,5 +22,10 @@ namespace MVCReizen.Repositories
         {
             return _context.Landen.Where(land => land.Werelddeelid == id).OrderBy(land => land.Naam).ToList();
         }
+        public string? GetLandNaamById(int id)
+        {
+            return _context.Landen.Where(land => land.Id == id).Select(land => land.Naam).FirstOrDefault();          
+        }
+       
     }
 }

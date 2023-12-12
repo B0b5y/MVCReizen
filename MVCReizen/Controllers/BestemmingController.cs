@@ -20,11 +20,9 @@ namespace MVCReizen.Controllers
         }
         public IActionResult ToonBestemmingen(int id)
         {
-
-            var bestemmingen = bestemmingService.GetAllBestemmingen().Where(bestemming => bestemming.Landid == id)
-                                                    .OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
-            var landNaam = landService.GetAllLanden().Where(land => land.Id == id).Select(land => land.Naam).FirstOrDefault();
-            ViewBag.LandNaam = landNaam;
+            var bestemmingen = bestemmingService.GetAllBesteminegenByLandId(id);
+            var landNaam = landService.GetLandNameById(id);
+                 ViewBag.LandNaam = landNaam;
             return View(bestemmingen);
         }
     }

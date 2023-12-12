@@ -21,7 +21,7 @@ builder.Services.AddTransient<IBoekingRepository,
 builder.Services.AddTransient<IReisRepository,
  SQLReisRepository>();
 builder.Services.AddTransient<IWerelddeelRepository,
- WerelddeelRepository>();
+ SQLWerelddeelRepository>();
 builder.Services.AddTransient<ILandRepository,
  SQLLandRepository>();
 builder.Services.AddControllersWithViews();

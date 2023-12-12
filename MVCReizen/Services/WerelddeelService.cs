@@ -6,7 +6,6 @@ namespace MVCReizen.Services
     public class WerelddeelService
     {
         private readonly IWerelddeelRepository werelddeelRepository;
-        private readonly WerelddeelService werelddeelService;
         public WerelddeelService(IWerelddeelRepository werelddeelRepository)
         {
             this.werelddeelRepository = werelddeelRepository;
@@ -19,7 +18,10 @@ namespace MVCReizen.Services
         {
             return werelddeelRepository.GetWerelddeelById(id);
         }
-       
+       public string? GetWereldeelNaamById(int id)
+        {
+            return werelddeelRepository.GetWerelddeelNaamById(id);
+        }
      
     }
 }

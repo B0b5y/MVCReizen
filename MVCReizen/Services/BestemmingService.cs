@@ -20,6 +20,10 @@ namespace MVCReizen.Services
         {
             return bestemmingRepository.GetBestemmingByCode(id);
         }
+        public IEnumerable<Bestemming> GetAllBesteminegenByLandId(int id)
+        {
+            return bestemmingRepository.GetAllBestemmingenByLandId(id);
+        }
 
     }
 }

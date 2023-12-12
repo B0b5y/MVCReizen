@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace MVCReizen.Repositories
 {
-    public class WerelddeelRepository : IWerelddeelRepository
+    public class SQLWerelddeelRepository : IWerelddeelRepository
     {
         private readonly ReizenContext _context;
 
-        public WerelddeelRepository(ReizenContext context)
+        public SQLWerelddeelRepository(ReizenContext context)
         {
             _context = context;
         }
@@ -19,13 +19,14 @@ namespace MVCReizen.Repositories
         {
             return _context.Werelddelen.ToList();
         }
-
-        public Werelddeel GetWerelddeelById(int id)
+        public Werelddeel? GetWerelddeelById(int id)
         {
             return _context.Werelddelen.Find(id);
         }
+        public string? GetWerelddeelNaamById(int id)
+        {
+            return _context.Werelddelen.Where(werelddeel => werelddeel.Id == id).Select(werelddeel => werelddeel.Naam).FirstOrDefault();
+        }
 
-
-     
     }
 }

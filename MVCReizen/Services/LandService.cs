@@ -23,5 +23,9 @@ namespace MVCReizen.Services
         {
             return landRepository.GetAllLandenByWerelddeel(id);
         }
+        public string? GetLandNameById(int id)
+        {
+            return landRepository.GetLandNaamById(id);
+        }
     }
 }

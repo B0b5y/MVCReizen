@@ -19,5 +19,10 @@ namespace MVCReizen.Repositories
         {
             return _context.Bestemmingen.Find(id);
         }
+       public IEnumerable<Bestemming> GetAllBestemmingenByLandId(int id)
+        {
+            return _context.Bestemmingen.Where(bestemming => bestemming.Landid == id)
+                                                    .OrderBy(bestemmingen => bestemmingen.Plaats).ToList();
+        }
     }
 }
