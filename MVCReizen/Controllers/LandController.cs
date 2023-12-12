@@ -15,7 +15,7 @@ namespace MVCReizen.Controllers
         }
         public IActionResult ToonLanden(int id)
         {
-            var landen = landService.GetAllLanden().Where(land => land.Werelddeelid == id).OrderBy(land => land.Naam).ToList();
+            var landen = landService.GetAllLandenByWerelddeel(id);
             var werelddeelNaam = werelddeelService.GetAllWerelddelen().Where(werelddeel => werelddeel.Id == id)
                                                  .Select(werelddeel => werelddeel.Naam).FirstOrDefault();
             ViewBag.WerelddeelNaam = werelddeelNaam;

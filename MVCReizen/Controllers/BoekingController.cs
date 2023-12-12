@@ -45,7 +45,7 @@ namespace MVCReizen.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult KlarBoeking(ReisKlantEnNieuweReisForm reisKlantEnNieuweReisForm)
+        public IActionResult BoekingKlaar(ReisKlantEnNieuweReisForm reisKlantEnNieuweReisForm)
         {
             if (this.ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace MVCReizen.Controllers
                     GeboektOp = DateTime.Now
                 };
                 boekingService.AddBoeking(boeking);
-                return RedirectToAction(nameof(BoekingBewestigen), new { boekingId = boeking.Id });
+                return RedirectToAction(nameof(BoekingBevestigen), new { boekingId = boeking.Id });
             }
             reisKlantEnNieuweReisForm.Klant = klantService.GetAllKlanten()
                 .Where(klant => klant.Id == reisKlantEnNieuweReisForm.NieuweReisForm.KlantId)
@@ -75,7 +75,7 @@ namespace MVCReizen.Controllers
             return View(nameof(Boeking), reisKlantEnNieuweReisForm);
         }
         [HttpGet]
-        public IActionResult BoekingBewestigen(int boekingId)
+        public IActionResult BoekingBevestigen(int boekingId)
         {
             var boeking = new Boeking { Id = boekingId };
             return View(boeking);

@@ -15,10 +15,13 @@ namespace MVCReizen.Services
         {
             return landRepository.GetAllLanden();
         }
-
         public Land? GetLandById(int id)
         {
             return landRepository.GetLandById(id);
+        }
+        public IEnumerable<Land> GetAllLandenByWerelddeel(int id)
+        {
+            return landRepository.GetAllLandenByWerelddeel(id);
         }
     }
 }
