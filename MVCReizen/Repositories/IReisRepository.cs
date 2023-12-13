@@ -11,5 +11,6 @@ namespace MVCReizen.Repositories
         void UpdateReis(Reis reis);
         IEnumerable<Reis> GetAllReizenMetBestemmingen();
         Reis? GetReisMetBestemmingenByReisId(int reisId);
+        IEnumerable<Reis> GetAllReizenMetZelfdeBetstemmingscode(string id);
     }
 }

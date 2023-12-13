@@ -19,8 +19,7 @@ namespace MVCReizen.Controllers
         }
         public IActionResult ToonReizen(string id)
         {
-            var reizen = reisService.GetAllReizen().Where(reis => reis.Bestemmingscode == id)
-                                                 .OrderBy(reizen => reizen.Vertrek).ToList();
+            var reizen = reisService.GetAllReizenMetZelfdeBestemmingscode(id);
             var bestemming = bestemmingService.GetBestemmingByCode(id);
             ViewBag.BestemmingsNaam = bestemming.Plaats;
             return View(reizen);

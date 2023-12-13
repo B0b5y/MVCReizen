@@ -29,9 +29,14 @@ namespace MVCReizen.Services
         }
         public Reis? GetReisMetBestemmingenByReisId(int reisId)
         {
-            return GetReisMetBestemmingenByReisId(reisId);            
+            return reisRepository.GetReisMetBestemmingenByReisId(reisId);            
         }
-        
+        public IEnumerable<Reis> GetAllReizenMetZelfdeBestemmingscode(string id)
+        {
+            return reisRepository.GetAllReizenMetZelfdeBetstemmingscode(id);
+        }
+
+
 
     }
 }
