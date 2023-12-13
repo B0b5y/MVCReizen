@@ -33,9 +33,7 @@ namespace MVCReizen.Repositories
         }
         public Reis? GetReisMetBestemmingenByReisId(int reisId)
         {
-            _context.Reizen
-                    .Include(reis => reis.BestemmingscodeNavigation).ToList().Where(reis => reis.Id == reisId).FirstOrDefault();
-
+            return _context.Reizen.Include(reis => reis.BestemmingscodeNavigation).ToList().Where(reis => reis.Id == reisId).FirstOrDefault();
         }
 
         //GetAllReizenMetBetemmingen().Where(reis => reis.Id == reisId)

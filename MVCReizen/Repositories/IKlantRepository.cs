@@ -6,5 +6,6 @@ namespace MVCReizen.Repositories
     {
         Klant GetKlantById(int id);
         IQueryable<Klant> GetAllKlanten();
+        public ICollection<Klant> GetKlantenByWoonplaatsEnFamilienaam(string klantZoeken);
     }
 }

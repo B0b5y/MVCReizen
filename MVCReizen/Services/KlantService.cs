@@ -22,5 +22,9 @@ namespace MVCReizen.Services
         {
             return klantRepository.GetKlantById(id);
         }
+        public ICollection<Klant> GetKlantenByWoonplaatsEnFamilienaam(string klantZoeken)
+        {
+            return klantRepository.GetKlantenByWoonplaatsEnFamilienaam(klantZoeken);
+        }
     }
 }
