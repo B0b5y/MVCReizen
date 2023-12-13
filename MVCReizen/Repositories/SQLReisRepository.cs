@@ -31,8 +31,15 @@ namespace MVCReizen.Repositories
             _context.Reizen.Update(reis);
             //_context.SaveChanges();
         }
+        public Reis? GetReisMetBestemmingenByReisId(int reisId)
+        {
+            _context.Reizen
+                    .Include(reis => reis.BestemmingscodeNavigation).ToList().Where(reis => reis.Id == reisId).FirstOrDefault();
 
-           
-        
+        }
+
+        //GetAllReizenMetBetemmingen().Where(reis => reis.Id == reisId)
+        //         .FirstOrDefault();
+
     }
 }

@@ -29,8 +29,7 @@ namespace MVCReizen.Controllers
         [HttpGet]
         public IActionResult Zoek(string klantZoeken, int reisId)
         {
-            var reis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == reisId)
-                    .FirstOrDefault();
+            var reis = reisService.GetReisMetBestemmingenByReisId(reisId);
             var klanten = klantService.GetAllKlanten().Where(klant => klant.Familienaam.Contains(klantZoeken))
                     .Include(klant => klant.Woonplaats).OrderBy(klant => klant.Familienaam).ToList();
             var reisEnKlanten = new ReisEnKlanten() { Reis = reis, Klanten = klanten };
