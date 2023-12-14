@@ -29,7 +29,11 @@ namespace MVCReizen.Repositories
         {
             return _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();
         }
+        
+        //klantService.GetAllKlanten()
+        //        .Where(klant => klant.Id == reisKlantEnNieuweReisForm.NieuweReisForm.KlantId)
+        //        .Include(klant => klant.Woonplaats).FirstOrDefault();
 
-           
+
     }
 }

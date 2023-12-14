@@ -65,12 +65,9 @@ namespace MVCReizen.Controllers
                 boekingService.AddBoeking(boeking);
                 return RedirectToAction(nameof(BoekingBevestigen), new { boekingId = boeking.Id });
             }
-            reisKlantEnNieuweReisForm.Klant = klantService.GetAllKlanten()
-                .Where(klant => klant.Id == reisKlantEnNieuweReisForm.NieuweReisForm.KlantId)
-                .Include(klant => klant.Woonplaats).FirstOrDefault();
-            reisKlantEnNieuweReisForm.Reis = reisService.GetAllReizenMetBetemmingen()
-                .Where(reis => reis.Id == reisKlantEnNieuweReisForm.NieuweReisForm.ReisId)
-                .FirstOrDefault();
+            reisKlantEnNieuweReisForm.Klant = klantService.GetKlantByIdMetWoonplaats(reisKlantEnNieuweReisForm.Klant.Id);
+
+            reisKlantEnNieuweReisForm.Reis = reisService.GetReisMetBestemmingenByReisId(reisKlantEnNieuweReisForm.Klant.Id);
             return View(nameof(Boeking), reisKlantEnNieuweReisForm);
         }
         [HttpGet]

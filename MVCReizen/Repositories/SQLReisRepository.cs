@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
+using MVCReizen.ModelView;
 
 namespace MVCReizen.Repositories
 {
@@ -40,8 +41,5 @@ namespace MVCReizen.Repositories
         {
             return _context.Reizen.Where(reis => reis.Bestemmingscode == id).OrderBy(reizen => reizen.Vertrek).ToList();
         }
-        
-        //GetAllReizenMetBetemmingen().Where(reis => reis.Id == id)
-        //        .FirstOrDefault();
     }
 }
