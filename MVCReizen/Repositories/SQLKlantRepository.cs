@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
+using MVCReizen.ModelView;
 using System.Numerics;
 
 namespace MVCReizen.Repositories
@@ -24,7 +25,11 @@ namespace MVCReizen.Repositories
         {
             return _context.Klanten.Where(klant => klant.Familienaam.Contains(klantZoeken)).Include(klant => klant.Woonplaats).OrderBy(klant => klant.Familienaam).ToList();             
         }
-        //GetAllKlanten().Where(klant => klant.Familienaam.Contains(klantZoeken))
-        //            .Include(klant => klant.Woonplaats).OrderBy(klant => klant.Familienaam).ToList();
+        public Klant? GetKlantByIdMetWoonplats(int klantId)
+        {
+            return _context.Klanten.Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();
+        }
+
+           
     }
 }

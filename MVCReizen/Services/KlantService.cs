@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCReizen.Models;
+using MVCReizen.ModelView;
 using MVCReizen.Repositories;
 using System.Linq;
+using System.Numerics;
 
 namespace MVCReizen.Services
 {
@@ -25,6 +27,10 @@ namespace MVCReizen.Services
         public ICollection<Klant> GetKlantenByWoonplaatsEnFamilienaam(string klantZoeken)
         {
             return klantRepository.GetKlantenByWoonplaatsEnFamilienaam(klantZoeken);
+        }   
+        public Klant? GetKlantByIdMetWoonplaats(int klandId)
+        {
+            return klantRepository.GetKlantByIdMetWoonplats(klandId);
         }
     }
 }

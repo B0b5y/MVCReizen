@@ -35,10 +35,6 @@ namespace MVCReizen.Repositories
         {
             return _context.Reizen.Include(reis => reis.BestemmingscodeNavigation).ToList().Where(reis => reis.Id == reisId).FirstOrDefault();
         }
-        //public IEnumerable<Reis> GetAllReizenMetZelfdeBestemmingscode(string id)
-        //{
-        //    return _context.Reizen.Where(reis => reis.Bestemmingscode == id).OrderBy(reizen => reizen.Vertrek).ToList();
-        //}
 
         public IEnumerable<Reis> GetAllReizenMetZelfdeBetstemmingscode(string id)
         {

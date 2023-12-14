@@ -27,9 +27,8 @@ namespace MVCReizen.Controllers
         [HttpGet]
         public IActionResult Boeking(int reisId, int klantId)
         {
-            var reis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == reisId)
-                .FirstOrDefault();
-            var klant = klantService.GetAllKlanten().Where(klant => klant.Id == klantId).Include(klant => klant.Woonplaats).FirstOrDefault();
+            var reis = reisService.GetReisMetBestemmingenByReisId(reisId);
+            var klant = klantService.GetKlantByIdMetWoonplaats(klantId);
             var nieuweReisForm = new NieuweReisForm()
             {
                 KlantId = klantId,
