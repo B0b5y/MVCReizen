@@ -10,16 +10,9 @@ namespace MVCReizen.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly BoekingService boekingService;
-        private readonly ReisService reisService;
-        private readonly WerelddeelService werelddeelService;
-        private readonly KlantService klantService;
-        private readonly BestemmingService bestemmingService;
-        private readonly LandService landService;
-        public HomeController(ILogger<HomeController> logger, WerelddeelService werelddeelService)
-        {
-            _logger = logger;      
+        private readonly WerelddeelService werelddeelService;    
+        public HomeController(WerelddeelService werelddeelService)
+        {           
             this.werelddeelService = werelddeelService;
         }
         public IActionResult Index()
@@ -28,17 +21,14 @@ namespace MVCReizen.Controllers
             ViewBag.werelddelen = werelddelen;
             return View(werelddelen);
         }
-
         public IActionResult Privacy()
         {
             return View();
         }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }     
-       
+        }            
     }
 } 

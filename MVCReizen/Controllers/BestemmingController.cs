@@ -6,8 +6,7 @@ namespace MVCReizen.Controllers
     public class BestemmingController : Controller
     {
         private readonly BestemmingService bestemmingService;
-        private readonly LandService landService;
-        
+        private readonly LandService landService;       
         public BestemmingController(
           BestemmingService bestemmingService, LandService landService)
         {
