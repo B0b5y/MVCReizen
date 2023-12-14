@@ -24,7 +24,7 @@ namespace MVCReizen.Controllers
         }
         public IActionResult Index()
         {
-            var werelddelen = werelddeelService.GetAllWerelddelen().OrderBy(werelddeel => werelddeel.Naam).ToList();
+            var werelddelen = werelddeelService.GetAllWerelddelenOrderByNaam();
             ViewBag.werelddelen = werelddelen;
             return View(werelddelen);
         }

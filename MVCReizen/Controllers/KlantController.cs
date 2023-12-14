@@ -22,8 +22,7 @@ namespace MVCReizen.Controllers
         }
         public IActionResult ZoekKlant(int id)
         {
-            var gekozenReis = reisService.GetAllReizenMetBetemmingen().Where(reis => reis.Id == id)
-                .FirstOrDefault();
+            var gekozenReis = reisService.GetReisMetBestemmingenByReisId(id);
             return View(gekozenReis);
         }
         [HttpGet]

@@ -18,10 +18,13 @@ namespace MVCReizen.Services
         {
             return werelddeelRepository.GetWerelddeelById(id);
         }
-       public string? GetWereldeelNaamById(int id)
-        {
+        public string? GetWereldeelNaamById(int id)
+        { 
             return werelddeelRepository.GetWerelddeelNaamById(id);
+        }        
+        public IEnumerable<Werelddeel> GetAllWerelddelenOrderByNaam()
+        {
+            return werelddeelRepository.GetAllWerelddelenOrderByNaam();
         }
-     
     }
 }

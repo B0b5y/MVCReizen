@@ -27,6 +27,10 @@ namespace MVCReizen.Repositories
         {
             return _context.Werelddelen.Where(werelddeel => werelddeel.Id == id).Select(werelddeel => werelddeel.Naam).FirstOrDefault();
         }
-
+        public IEnumerable<Werelddeel> GetAllWerelddelenOrderByNaam()
+        {
+            return _context.Werelddelen.OrderBy(Werelddeel => Werelddeel.Naam).ToList();
+        }
+        
     }
 }
